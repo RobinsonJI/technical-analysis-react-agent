@@ -54,6 +54,7 @@ cd trading
 ```
 
 2. **Install uv (recommended)**
+
 Install uv [here](https://docs.astral.sh/uv/getting-started/installation/).
 
 3. **Install dependencies**
@@ -133,9 +134,9 @@ The agent works with any OpenAI-compatible API (OpenRouter, OpenAI, Azure, etc.)
 
 ```bash
 # Use different models
-uv run dev --model "gpt-4o-mini"
-uv run dev --model "claude-3-sonnet"
-uv run dev --base-url "https://api.openai.com/v1"
+uv run agent --model "gpt-4o-mini"
+uv run agent --model "claude-3-sonnet"
+uv run agent --base-url "https://api.openai.com/v1"
 ```
 
 ### Temperature Tuning
@@ -145,64 +146,51 @@ uv run dev --base-url "https://api.openai.com/v1"
 
 ## Limitations
 
-**Not Financial Advice** - This tool provides technical analysis only, not investment advice
-**Historical Data Only** - Analyses past data; cannot predict future markets
-**Internet Dependent** - Requires API access to fetch stock data from yfinance and call LLM
+- **Not Financial Advice** - This tool provides technical analysis only, not investment advice
+- **Historical Data Only** - Analyses past data; cannot predict future markets
+- **Internet Dependent** - Requires API access to fetch stock data from yfinance and call LLM
 
 ## Project Structure
 
 ```
 trading/
-├── .env                                    # Configuration (API keys, model settings)
-├── main.py                                 # Entry point
-├── pyproject.toml                          # Dependencies
-├── README.md                               # This file
+.env                                    # Configuration (API keys, model settings)
+main.py                                 # Entry point
+pyproject.toml                          # Dependencies
+README.md                               # This file
+
+src/
+├── agents/
+│   └── trading_agent.py               # Main agent with tool execution
 │
-├── src/
-│   ├── agents/
-│   │   └── trading_agent.py               # Main agent with tool execution
-│   │
-│   ├── analysis/indicators/
-│   │   ├── fibonacci.py                   # Fibonacci retracement & extension
-│   │   ├── momentum.py                    # RSI, Stochastic, MACD
-│   │   ├── support_and_resistance.py      # Pivot Points
-│   │   ├── trend.py                       # SMA, EMA, MACD, ROC
-│   │   ├── volume.py                      # Volume, OBV analysis
-│   │   └── volatility.py                  # ATR, Bollinger Bands
-│   │
-│   ├── config/
-│   │   ├── logging_config.py              # Terminal logging setup
-│   │   └── __init__.py
-│   │
-│   ├── data/
-│   │   ├── basemodels.py                  # Pydantic models for tools
-│   │   ├── enums.py                       # TimePeriod, Interval enums
-│   │   └── fetcher.py                     # Yahoo Finance data fetching
-│   │
-│   ├── graph/
-│   │   └── react_graph.py                 # LangGraph workflow
-│   │
-│   ├── models/
-│   │   └── client.py                      # LLM client wrapper
-│   │
-│   ├── prompts/
-│   │   └── system.py                      # Agent system message
-│   │
-│   └── state/
-│       └── states.py                      # Agent state definition
+├── analysis/indicators/
+│   ├── fibonacci.py                   # Fibonacci retracement & extension
+│   ├── momentum.py                    # RSI, Stochastic, MACD
+│   ├── support_and_resistance.py      # Pivot Points
+│   ├── trend.py                       # SMA, EMA, MACD, ROC
+│   ├── volume.py                      # Volume, OBV analysis
+│   └── volatility.py                  # ATR, Bollinger Bands
 │
-├── notebooks/
-│   └── technical_analysis/
-│       └── various Python notebooks to test briefly check indicators.
+├── config/
+│   ├── logging_config.py              # Terminal logging setup
+│   └── __init__.py
 │
-└── technical_analysis/                    # (Future work directories)
-    ├── candlestick/
-    ├── fibonacci/
-    ├── indicators/
-    ├── patterns/
-    ├── support_resistance/
-    ├── trends/
-    └── volatility/
+├── data/
+│   ├── basemodels.py                  # Pydantic models for tools
+│   ├── enums.py                       # TimePeriod, Interval enums
+│   └── fetcher.py                     # Yahoo Finance data fetching
+│
+├── graph/
+│   └── react_graph.py                 # LangGraph workflow
+│
+├── models/
+│   └── client.py                      # LLM client wrapper
+│
+├── prompts/
+│   └── system.py                      # Agent system message
+│
+└── state/
+    └── states.py                      # Agent state definition
 ```
 
 ## License
