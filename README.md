@@ -1,4 +1,4 @@
-# Technical Analysis React Agent
+# Technical Analysis ReAct Agent
 
 A stock technical analysis agent powered by LLMs and LangGraph, providing comprehensive trading signals and recommendations using multiple technical indicators.
 
